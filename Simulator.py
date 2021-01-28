@@ -206,6 +206,14 @@ class Client():
                        value=4,command = (lambda x=2:self.intermed(x)), bg = "white")
         self.btncategory4.place(x=self.posxRadioBUttons+40, y=self.size * 8+90)
 
+        self.btncategory5 = Radiobutton(self.window,
+                                        text= "Simulate",
+                                        padx=20,
+                                        variable=self.typeRectangle,
+                                        value=5,command = (lambda x=3:self.intermed(x)),bg="white")
+        self.btncategory5.place(x=self.posxRadioBUttons+10,y=self.size * 4)
+
+
 
 
         self.flagConv = False
@@ -295,6 +303,8 @@ class Client():
             self.canvas.tag_bind(self.rectOption8.rect, "<ButtonRelease-1>",
                                  lambda event, x=self.rectOption8, id=8: self.released(event, x, id))
             self.canvas.tag_bind(self.rectOption8.rect, "<Button1-Motion>", lambda event, id=8: self.move(event, id))
+        elif self.varselection == 3:
+            print("Simulacion")
 
 
     def SALIR(self):
@@ -319,148 +329,112 @@ class Client():
         return number
 
     def released(self,event,object,id):
+        if not self.varselection == 3:
+            if self.posMousex >= 1 and self.posMousex <= 10 and self.posMousey>= 1 and self.posMousey <= 10:
 
+                if 1:
 
-        if self.posMousex >= 1 and self.posMousex <= 10 and self.posMousey>= 1 and self.posMousey <= 10:
+                    if self.flagConv:
+                        messagebox.showinfo("Error",
+                                            message="")
+                        self.printRectangleTYPE(self.varselection)
+                    else:
 
-            if 1:
-
-                if self.flagConv:
-                    messagebox.showinfo("Error",
-                                        message="")
-                    self.printRectangleTYPE(self.varselection)
-                else:
-
-                    r = None
-
-
-
-                    if id == 5:
-                        if self.posMousex > 8:
-                            self.posMousex -= (2 + (self.posMousex - 10))
-                        r = Rectangle(self.posMousex - 1, self.posMousey - 1, self.canvas, type=object.type, width=2,img=self.imgResistorh)
-
-                        self.matLogic[self.posMousey - 1][self.posMousex - 1] = object.type
-                        self.matLogic[self.posMousey - 1][self.posMousex] = object.type
-                        self.matLogic[self.posMousey - 1][self.posMousex + 1] = object.type
-
-
-                        self.lblContNav3.config(text="Disponibles:")
-
-
-                    elif id == 6 :
-                        if self.posMousey > 8:
-                            self.posMousey -= (2 + (self.posMousey - 10))
-                        r = Rectangle(self.posMousex - 1, self.posMousey - 1, self.canvas, type=object.type, width=2,
-                                      vhvariable=1, img = self.imgResistorv)
-                        self.matLogic[self.posMousey - 1][self.posMousex - 1] = object.type
-                        self.matLogic[self.posMousey][self.posMousex - 1] = object.type
-                        self.matLogic[self.posMousey + 1][self.posMousex - 1] = object.type
-
-
-                        self.lblContNav3.config(text="Disponibles:")
-
-
-                    elif id == 7:
-                        if self.posMousex > 9:
-                            self.posMousex -= (1 + (self.posMousex - 10))
-                        r = Rectangle(self.posMousex - 1, self.posMousey - 1, self.canvas, type=object.type, width=2,img = self.imgSourceh)
-
-                        self.matLogic[self.posMousey - 1][self.posMousex - 1] = object.type
-                        self.matLogic[self.posMousey - 1][self.posMousex] = object.type
-
-
-                        self.lblContNav4.config(text="Disponibles:")
+                        r = None
 
 
 
-                    elif id == 8:
-                        if self.posMousey > 9:
-                            self.posMousey -= (1 + (self.posMousey - 10))
-                        r = Rectangle(self.posMousex - 1, self.posMousey - 1, self.canvas, type=object.type, width=2,
-                                      vhvariable=1,img = self.imgSourcev)
-                        self.matLogic[self.posMousey - 1][self.posMousex - 1] = object.type
-                        self.matLogic[self.posMousey][self.posMousex - 1] = object.type
+                        if id == 5:
+                            if self.posMousex > 8:
+                                self.posMousex -= (2 + (self.posMousex - 10))
+                            r = Rectangle(self.posMousex - 1, self.posMousey - 1, self.canvas, type=object.type, width=2,img=self.imgResistorh)
+
+                            self.matLogic[self.posMousey - 1][self.posMousex - 1] = object.type
+                            self.matLogic[self.posMousey - 1][self.posMousex] = object.type
+                            self.matLogic[self.posMousey - 1][self.posMousex + 1] = object.type
 
 
-                        self.lblContNav4.config(text="Disponibles:")
+                            self.lblContNav3.config(text="Disponibles:")
+
+
+                        elif id == 6 :
+                            if self.posMousey > 8:
+                                self.posMousey -= (2 + (self.posMousey - 10))
+                            r = Rectangle(self.posMousex - 1, self.posMousey - 1, self.canvas, type=object.type, width=2,
+                                          vhvariable=1, img = self.imgResistorv)
+                            self.matLogic[self.posMousey - 1][self.posMousex - 1] = object.type
+                            self.matLogic[self.posMousey][self.posMousex - 1] = object.type
+                            self.matLogic[self.posMousey + 1][self.posMousex - 1] = object.type
+
+
+                            self.lblContNav3.config(text="Disponibles:")
+
+
+                        elif id == 7:
+                            if self.posMousex > 9:
+                                self.posMousex -= (1 + (self.posMousex - 10))
+                            r = Rectangle(self.posMousex - 1, self.posMousey - 1, self.canvas, type=object.type, width=2,img = self.imgSourceh)
+
+                            self.matLogic[self.posMousey - 1][self.posMousex - 1] = object.type
+                            self.matLogic[self.posMousey - 1][self.posMousex] = object.type
+
+
+                            self.lblContNav4.config(text="Disponibles:")
+
+
+
+                        elif id == 8:
+                            if self.posMousey > 9:
+                                self.posMousey -= (1 + (self.posMousey - 10))
+                            r = Rectangle(self.posMousex - 1, self.posMousey - 1, self.canvas, type=object.type, width=2,
+                                          vhvariable=1,img = self.imgSourcev)
+                            self.matLogic[self.posMousey - 1][self.posMousex - 1] = object.type
+                            self.matLogic[self.posMousey][self.posMousex - 1] = object.type
+
+
+                            self.lblContNav4.config(text="Disponibles:")
 
 
 
 
 
-                    if r!=None:
-                        self.canvas.tag_bind(r.rect, "<ButtonPress-1>",
-                                             lambda event, x=r.rect, id=id: self.bottonPressed(event, x, id))
-                        self.canvas.tag_bind(r.rect, "<ButtonRelease-1>",
-                                             lambda event, x=r, id=id: self.released(event, x, id))
-                        self.canvas.tag_bind(r.rect, "<Button1-Motion>",
-                                             lambda event, id=id: self.move(event, id))
+                        if r!=None:
+                            self.canvas.tag_bind(r.rect, "<ButtonPress-1>",
+                                                 lambda event, x=r.rect, id=id: self.bottonPressed(event, x, id))
+                            self.canvas.tag_bind(r.rect, "<ButtonRelease-1>",
+                                                 lambda event, x=r, id=id: self.released(event, x, id))
+                            self.canvas.tag_bind(r.rect, "<Button1-Motion>",
+                                                 lambda event, id=id: self.move(event, id))
 
-                        self.rectanglesList += [r]
-
-
-                    self.printRectangleTYPE(self.varselection)
+                            self.rectanglesList += [r]
 
 
+                        self.printRectangleTYPE(self.varselection)
 
-            self.printM(self.matLogic,"Matriz Actual")
 
 
+                self.printM(self.matLogic,"Matriz Actual")
+
+
+            else:
+                if self.categoryInMatrix(object.type) and self.categoryInListRectangles(object.type):
+
+                    self.deleteCategoryMatriz(object.type)
+
+
+
+                self.printRectangleTYPE(self.varselection)
         else:
-            if self.categoryInMatrix(object.type) and self.categoryInListRectangles(object.type):
-
-                self.deleteCategoryMatriz(object.type)
-
-
-
-            self.printRectangleTYPE(self.varselection)
-
+            print("Simulation")
 
 
     def bottonPressed(self,event, x,id):
-
-        self.actualPiece = x
-        self.actualPieceInfo = (self.actualPiece, event.x, event.y)
-
+        if not self.varselection == 3:
+            self.actualPiece = x
+            self.actualPieceInfo = (self.actualPiece, event.x, event.y)
         print(self.posMousex,self.posMousey)
-        if self.flagJugar:
-            if self.flagTurno == True:
-                # Juego humano
-                if (self.posMousex >= 12 or self.posMousex <= 21) and ( self.posMousey >= 1 or self.posMousey <= 10):
-                    print("UBICACION", self.posMousey-1,self.posMousex-12)
-                    if 1 == 2: #Borrar esta condicion
-                        r = Rectangle(self.posMousex - 1, self.posMousey - 1, self.canvas, "#A1EE1B")
-                    else:
-                        r = Rectangle(self.posMousex - 1, self.posMousey - 1, self.canvas, "black")
-
-                    self.matLogicPC[self.posMousey - 1][self.posMousex - 12] = -1
-
-                    if self.preguntarGanador(self.matLogicPC):
-                        m = messagebox.showinfo(title="Ganador: " + str(self.name), message="Haz ganado la partida " + str(self.name))
-
-                    # Juego de la computadora
-
-                    randomxm,randomym = random.randint(0,9),random.randint(0,9)
-                    while self.matLogic[randomym][randomxm] == -1:
-                        randomxm, randomym = random.randint(0, 9), random.randint(0, 9)
-
-
-                    print("RANDOM",randomxm,randomym)
-                    if self.matLogic[randomym][randomxm] != 0:
-                        rr = Rectangle(randomxm , randomym , self.canvas,
-                                                                        "#A1EE1B")
-                    else:
-                        rr = Rectangle(randomxm , randomym , self.canvas,
-                                                                        "black")
-
-                    self.matLogic[randomym][randomxm] = -1
-
-                    if self.preguntarGanador(self.matLogic):
-                        m = messagebox.showinfo(title="Ganador: PC" , message="El computador te ha ganado")
 
     def move(self,event,id):
-
         self.canvas.move(self.actualPieceInfo[0], event.x - self.actualPieceInfo[1],
                              event.y - self.actualPieceInfo[2])
         self.actualPieceInfo = (self.actualPiece, event.x, event.y)
