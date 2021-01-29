@@ -112,6 +112,9 @@ class Client():
         self.lblTitle.place(x=600, y=60)
 
 
+        self.i = 0
+
+
 
         # IMAGENES
 
@@ -213,6 +216,13 @@ class Client():
                                         value=5,command = (lambda x=3:self.intermed(x)),bg="white")
         self.btncategory5.place(x=self.posxRadioBUttons+10,y=self.size * 4)
 
+        self.btncategory6 = Radiobutton(self.window,
+                                        text="Reset Num",
+                                        padx=20,
+                                        variable=self.typeRectangle,
+                                        value=6, command=(lambda x=4: self.intermed(x)), bg="white")
+        self.btncategory6.place(x=self.posxRadioBUttons + 10, y=self.size * 4 + 40)
+
 
 
 
@@ -305,6 +315,8 @@ class Client():
             self.canvas.tag_bind(self.rectOption8.rect, "<Button1-Motion>", lambda event, id=8: self.move(event, id))
         elif self.varselection == 3:
             print("Simulacion")
+        elif self.varselection == 4:
+            self.i = 0
 
 
     def SALIR(self):
@@ -425,7 +437,23 @@ class Client():
 
                 self.printRectangleTYPE(self.varselection)
         else:
-            print("Simulation")
+            print("Simulation",self.i)
+            if self.posMousex >= 1 and self.posMousex <= 10 and self.posMousey >= 1 and self.posMousey <= 10:
+                if id == 5:
+                    if self.posMousex > 8:
+                        self.posMousex -= (2 + (self.posMousex - 10))
+                elif id == 6:
+                    if self.posMousey > 8:
+                        self.posMousey -= (2 + (self.posMousey - 10))
+                elif id == 7:
+                    if self.posMousex > 9:
+                        self.posMousex -= (1 + (self.posMousex - 10))
+                elif id == 8:
+                    if self.posMousey > 9:
+                        self.posMousey -= (1 + (self.posMousey - 10))
+                print("x:"+ str(self.posMousex),"y:" + str(self.posMousey))
+                Label(self.canvas,text=str(self.i)+" Ω").place(x=(self.posMousex*50)-60, y=(self.posMousey - 1)*50)
+                self.i += 1
 
 
     def bottonPressed(self,event, x,id):
