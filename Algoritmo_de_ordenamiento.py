@@ -1,8 +1,8 @@
 '''
 radixSort(listIn):
-    E: Lista de enteros
-    S: Retorna las lista ordenada de forma ascendente
-    R: -
+    Entrada: Lista de enteros
+    Salida: Retorna las lista ordenada de forma ascendente
+    Restricciones: -
 '''
 
 def radixSort(listIn):
@@ -47,9 +47,9 @@ def radixSort(listIn):
 
 '''
 insertionSort(listOrd):
-    E: Lista de elementos comparables
-    S: Lista ordenada de forma descendente
-    R: -
+    Entrada: Lista de elementos comparables
+    Salida: Lista ordenada de forma descendente
+    Restricciones: -
 '''
 
 
@@ -74,9 +74,9 @@ def insertion_Sort(listOrd):
 
 '''
 shellSort(listOrd):
-    E: Lista de elementos comparables
-    S: Lista ordenada de forma ascendente
-    R: -
+    Entrada: Lista de elementos comparables
+    Salida: Lista ordenada de forma ascendente
+    Restricciones: -
 '''
 def shell_Sort(listOrd):
     print("asc org")
