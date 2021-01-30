@@ -13,8 +13,9 @@ from tkinter import simpledialog
 from datetime import datetime
 from datetime import date
 
-
-
+Resistores = []
+Fuente = []
+Voltajes = []
 class Rectangle:
     def __init__(self ,i ,j ,canvas,color = "white", width = 0 , type = -1, size = 40, vhvariable = 0,outLcolor = "black", img = None):
 
@@ -341,6 +342,7 @@ class Client():
         return number
 
     def released(self,event,object,id):
+        global Resistores, Voltajes, Fuente
         if not self.varselection == 3:
             if self.posMousex >= 1 and self.posMousex <= 10 and self.posMousey>= 1 and self.posMousey <= 10:
 
@@ -365,6 +367,9 @@ class Client():
                             self.matLogic[self.posMousey - 1][self.posMousex] = object.type
                             self.matLogic[self.posMousey - 1][self.posMousex + 1] = object.type
 
+                            Resistores += [simpledialog.askstring("Resistencia","Ingrese el nombre de la resistencia")]
+                            Voltajes += [simpledialog.askstring("Voltaje","Ingrese el voltaje")]
+
 
                             self.lblContNav3.config(text="Disponibles:")
 
@@ -378,6 +383,9 @@ class Client():
                             self.matLogic[self.posMousey][self.posMousex - 1] = object.type
                             self.matLogic[self.posMousey + 1][self.posMousex - 1] = object.type
 
+                            Resistores += [simpledialog.askstring("Resistencia", "Ingrese el nombre de la resistencia")]
+                            Voltajes += [simpledialog.askstring("Voltaje", "Ingrese el voltaje")]
+
 
                             self.lblContNav3.config(text="Disponibles:")
 
@@ -389,6 +397,8 @@ class Client():
 
                             self.matLogic[self.posMousey - 1][self.posMousex - 1] = object.type
                             self.matLogic[self.posMousey - 1][self.posMousex] = object.type
+
+                            Fuente += [simpledialog.askstring("Fuente", "Ingrese el nombre de la Fuente")]
 
 
                             self.lblContNav4.config(text="Disponibles:")
@@ -402,6 +412,8 @@ class Client():
                                           vhvariable=1,img = self.imgSourcev)
                             self.matLogic[self.posMousey - 1][self.posMousex - 1] = object.type
                             self.matLogic[self.posMousey][self.posMousex - 1] = object.type
+
+                            Fuente += [simpledialog.askstring("Resistencia", "Ingrese el nombre de la Fuente")]
 
 
                             self.lblContNav4.config(text="Disponibles:")
@@ -438,22 +450,7 @@ class Client():
                 self.printRectangleTYPE(self.varselection)
         else:
             print("Simulation",self.i)
-            if self.posMousex >= 1 and self.posMousex <= 10 and self.posMousey >= 1 and self.posMousey <= 10:
-                if id == 5:
-                    if self.posMousex > 8:
-                        self.posMousex -= (2 + (self.posMousex - 10))
-                elif id == 6:
-                    if self.posMousey > 8:
-                        self.posMousey -= (2 + (self.posMousey - 10))
-                elif id == 7:
-                    if self.posMousex > 9:
-                        self.posMousex -= (1 + (self.posMousex - 10))
-                elif id == 8:
-                    if self.posMousey > 9:
-                        self.posMousey -= (1 + (self.posMousey - 10))
-                print("x:"+ str(self.posMousex),"y:" + str(self.posMousey))
-                Label(self.canvas,text=str(self.i)+" Ω").place(x=(self.posMousex*50)-60, y=(self.posMousey - 1)*50)
-                self.i += 1
+
 
 
     def bottonPressed(self,event, x,id):
