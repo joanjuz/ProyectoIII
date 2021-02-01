@@ -17,6 +17,26 @@ Resistores = []
 Fuente = []
 Voltajes = []
 class Rectangle:
+    """
+         *************************************************************************************
+
+                             Instituto Tecnologíco de Costa Rica
+
+
+                                   Ingeniería en Computadores
+
+
+
+               Lenguaje y versión: Python 3.9
+               Autor: Joan Ugalde Zárate y Felipe Vargas
+               version: 1.0
+               Fecha de última modificacion: 28 Enero 2021
+
+               Entradas: No posee
+               Restricciones: No posee
+               Salidas: -
+
+         *************************************************************************************"""
     def __init__(self ,i ,j ,canvas,color = "white", width = 0 , type = -1, size = 40, vhvariable = 0,outLcolor = "black", img = None):
 
         self.posi = i
@@ -104,7 +124,6 @@ class Client():
         self.bloqueActual = 0
         self.flagJugar = False
 
-        self.btnPlay = Button(self.canvas, text="Analizar", width=20, height=2).place(x=300,y=600)
 
         self.lblTitle = Label(self.window,text = "Modo Diseñador", fg = "black", bg = "white",font=("Times", 15))
         self.lblTitle.place(x = 600 ,  y = 320)
@@ -218,11 +237,11 @@ class Client():
         self.btncategory5.place(x=self.posxRadioBUttons+10,y=self.size * 4)
 
         self.btncategory6 = Radiobutton(self.window,
-                                        text="Reset Num",
+                                        text="Cables",
                                         padx=20,
                                         variable=self.typeRectangle,
                                         value=6, command=(lambda x=4: self.intermed(x)), bg="white")
-        self.btncategory6.place(x=self.posxRadioBUttons + 10, y=self.size * 4 + 40)
+        self.btncategory6.place(x=self.posxRadioBUttons + 40, y=self.size * 8 + 120)
 
 
 
@@ -317,7 +336,11 @@ class Client():
         elif self.varselection == 3:
             print("Simulacion")
         elif self.varselection == 4:
-            self.i = 0
+            a = self.canvas.bind("<ButtonPress-1>",drawLine)
+            b = self.canvas.bind("<ButtonRelease-1>",drawLinet)
+            Button(self.canvas, text="Insert", width=20, height=2,command=(self.canvas.create_line(a[0],a[1],b[0],b[1],fill="Black",width=10),print("Creando"))).place(x=600, y=600)
+
+
 
 
     def SALIR(self):
@@ -549,5 +572,15 @@ class MenuG:
             #if answer is not None:
             self.window.destroy()
             Client("Simulator")
+def drawLine(e):
+    x1 = e.x
+    y1 = e.y
+    print(x1,y1)
+    return [x1,y1]
 
+def drawLinet(e):
+    x1 = e.x
+    y1 = e.y
+    print(x1,y1)
+    return [x1, y1]
 m = MenuG()
